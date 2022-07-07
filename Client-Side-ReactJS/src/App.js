@@ -10,22 +10,16 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      players: [
-        {
-          username: "tes",
-          email: "tes@gmail.com",
-          password: "123",
-          experience: 0,
-          lvl: 0,
-        },
-      ],
+      players: [],
       form: {
+        id: 0,
         username: "",
         email: "",
         password: "",
         experience: 0,
         lvl: 0,
       },
+      titleForm: 'Add Form'
     };
   }
 
@@ -36,7 +30,7 @@ export class App extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        [key]: value 
+        [key]: value
       }
     });
   }
@@ -44,16 +38,46 @@ export class App extends Component {
   submitAddHandler = (e) => {
     e.preventDefault();
     
+    if(this.state.titleForm === 'Add Form'){
+      this.state.form.id = this.state.players.length > 0 ? this.state.players[this.state.players.length - 1].id + 1 : 1
+        
+      this.setState({
+        players: [...this.state.players, this.state.form],
+        form: {
+          id: 0,
+          username: "",
+          email: "",
+          password: "",
+          experience: 0,
+          lvl: 0,
+        },
+        titleForm: 'Add Form'
+      });
+    }
+
+    if(this.state.titleForm === 'Edit Form'){
+      const data = this.state.players.map(i => i.id === this.state.form.id ? this.state.form : i);
+
+      this.setState({
+        players: data,
+        form: {
+          id: 0,
+          username: "",
+          email: "",
+          password: "",
+          experience: 0,
+          lvl: 0,
+        },
+        titleForm: 'Add Form'
+      });
+    }
+  }
+
+  editFormHandler = (data) => {
     this.setState({
-      players: [...this.state.players, this.state.form],
-      form: {
-        username: "",
-        email: "",
-        password: "",
-        experience: 0,
-        lvl: 0,
-      }
-    });
+      form: data,
+      titleForm: 'Edit Form'
+    })
   }
 
   render() {
@@ -62,10 +86,10 @@ export class App extends Component {
         <Row>
           <Col md={8} className="p-4 border">
             <Search />
-            <ListPlayer players={this.state.players} />
+            <ListPlayer players={this.state.players} editFormHandler={this.editFormHandler} />
           </Col>
           <Col md={4} className="p-4 border bg-secondary">
-            <Forms form={this.state.form} changeFormHandler={this.changeFormHandler} submitAddHandler={this.submitAddHandler} />
+            <Forms form={this.state.form} titleForm={this.state.titleForm} changeFormHandler={this.changeFormHandler} submitAddHandler={this.submitAddHandler} />
           </Col>
         </Row>
       </Container>
