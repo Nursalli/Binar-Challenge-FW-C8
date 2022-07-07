@@ -19,28 +19,28 @@ export class App extends Component {
         experience: 0,
         lvl: 0,
       },
-      titleForm: 'Add Form'
+      titleForm: "Add Form",
     };
   }
 
   changeFormHandler = (e) => {
     const key = e.target.name;
-    const value = e.target.value; 
+    const value = e.target.value;
 
     this.setState({
       form: {
         ...this.state.form,
-        [key]: value
-      }
+        [key]: value,
+      },
     });
-  }
+  };
 
   submitAddHandler = (e) => {
     e.preventDefault();
-    
-    if(this.state.titleForm === 'Add Form'){
-      this.state.form.id = this.state.players.length > 0 ? this.state.players[this.state.players.length - 1].id + 1 : 1
-        
+
+    if (this.state.titleForm === "Add Form") {
+      this.state.form.id = this.state.players.length > 0 ? this.state.players[this.state.players.length - 1].id + 1 : 1;
+
       this.setState({
         players: [...this.state.players, this.state.form],
         form: {
@@ -51,12 +51,14 @@ export class App extends Component {
           experience: 0,
           lvl: 0,
         },
-        titleForm: 'Add Form'
+        titleForm: "Add Form",
       });
     }
 
-    if(this.state.titleForm === 'Edit Form'){
-      const data = this.state.players.map(i => i.id === this.state.form.id ? this.state.form : i);
+    if (this.state.titleForm === "Edit Form") {
+      const data = this.state.players.map((i) =>
+        i.id === this.state.form.id ? this.state.form : i
+      );
 
       this.setState({
         players: data,
@@ -68,17 +70,24 @@ export class App extends Component {
           experience: 0,
           lvl: 0,
         },
-        titleForm: 'Add Form'
+        titleForm: "Add Form",
       });
     }
-  }
+  };
 
   editFormHandler = (data) => {
     this.setState({
       form: data,
-      titleForm: 'Edit Form'
-    })
-  }
+      titleForm: "Edit Form",
+    });
+  };
+
+  deleteFormHandler = (id) => {
+    const data = this.state.players.filter((i) => i.id !== id);
+    this.setState({
+      players: data,
+    });
+  };
 
   render() {
     return (
@@ -86,10 +95,19 @@ export class App extends Component {
         <Row>
           <Col md={8} className="p-4 border">
             <Search />
-            <ListPlayer players={this.state.players} editFormHandler={this.editFormHandler} />
+            <ListPlayer
+              players={this.state.players}
+              editFormHandler={this.editFormHandler}
+              deleteFormHandler={this.deleteFormHandler}
+            />
           </Col>
           <Col md={4} className="p-4 border bg-secondary">
-            <Forms form={this.state.form} titleForm={this.state.titleForm} changeFormHandler={this.changeFormHandler} submitAddHandler={this.submitAddHandler} />
+            <Forms
+              form={this.state.form}
+              titleForm={this.state.titleForm}
+              changeFormHandler={this.changeFormHandler}
+              submitAddHandler={this.submitAddHandler}
+            />
           </Col>
         </Row>
       </Container>
