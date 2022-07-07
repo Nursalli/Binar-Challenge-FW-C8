@@ -7,18 +7,16 @@ function ListPlayer(props) {
   const { players } = props;
 
   return (
-    <Row>
-      {players.map((data) => (
-        <Col md={4}>
-          <Card className="bg-success text-light shadow">
+    <Row className="overflow-auto players">
+      {players.map((data, i) => (
+        <Col key={i} md={4}>
+          <Card className="bg-success text-light shadow mb-3">
             <Card.Header className="text-center">{data.username}</Card.Header>
             <Card.Body>
-              <Card.Text>
-                <p>Email: {data.email}</p>
-                <p>Password: {data.password}</p>
-                <p>Experience: {data.experience}</p>
-                <p>Level: {data.lvl}</p>
-              </Card.Text>
+              <Card.Text>Email: {data.email}</Card.Text>
+              <Card.Text>Password: {data.password}</Card.Text>
+              <Card.Text>Experience: {data.experience}</Card.Text>
+              <Card.Text>Level: {data.lvl}</Card.Text>
               <Button variant="warning me-2">
                 <FontAwesomeIcon icon={faPenToSquare} />
               </Button>

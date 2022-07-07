@@ -29,6 +29,33 @@ export class App extends Component {
     };
   }
 
+  changeFormHandler = (e) => {
+    const key = e.target.name;
+    const value = e.target.value; 
+
+    this.setState({
+      form: {
+        ...this.state.form,
+        [key]: value 
+      }
+    });
+  }
+
+  submitAddHandler = (e) => {
+    e.preventDefault();
+    
+    this.setState({
+      players: [...this.state.players, this.state.form],
+      form: {
+        username: "",
+        email: "",
+        password: "",
+        experience: 0,
+        lvl: 0,
+      }
+    });
+  }
+
   render() {
     return (
       <Container className="my-4">
@@ -38,7 +65,7 @@ export class App extends Component {
             <ListPlayer players={this.state.players} />
           </Col>
           <Col md={4} className="p-4 border bg-secondary">
-            <Forms form={this.state.form} />
+            <Forms form={this.state.form} changeFormHandler={this.changeFormHandler} submitAddHandler={this.submitAddHandler} />
           </Col>
         </Row>
       </Container>

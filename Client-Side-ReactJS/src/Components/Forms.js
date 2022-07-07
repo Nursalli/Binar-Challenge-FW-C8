@@ -2,17 +2,19 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 function Forms(props) {
-  const { form } = props;
+  const { form, changeFormHandler, submitAddHandler } = props;
   return (
     <div className="text-light">
       <h3 className="mb-3 text-center">Form Add</h3>
-      <Form>
+      <Form onSubmit={submitAddHandler} method="POST">
         <Form.Group className="mb-3" controlId="formUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type="email"
+            type="text"
             placeholder="Enter Username"
+            name="username"
             value={form.username}
+            onChange={(e) => changeFormHandler(e)}
           />
         </Form.Group>
 
@@ -21,7 +23,9 @@ function Forms(props) {
           <Form.Control
             type="email"
             placeholder="Enter Email"
+            name="email"
             value={form.email}
+            onChange={(e) => changeFormHandler(e)}
           />
         </Form.Group>
 
@@ -30,7 +34,9 @@ function Forms(props) {
           <Form.Control
             type="password"
             placeholder="Password"
+            name="password"
             value={form.password}
+            onChange={(e) => changeFormHandler(e)}
           />
         </Form.Group>
 
@@ -39,7 +45,9 @@ function Forms(props) {
           <Form.Control
             type="number"
             placeholder="Amount Experience"
+            name="experience"
             value={form.experience}
+            onChange={(e) => changeFormHandler(e)}
           />
         </Form.Group>
 
@@ -48,7 +56,9 @@ function Forms(props) {
           <Form.Control
             type="number"
             placeholder="Amount Level"
+            name="lvl"
             value={form.lvl}
+            onChange={(e) => changeFormHandler(e)}
           />
         </Form.Group>
 
