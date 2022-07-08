@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-@media only screen and (max-height: 1000px) {
+@media only screen and (max-height: 1200px) {
   .players{
     height:560px;
   }

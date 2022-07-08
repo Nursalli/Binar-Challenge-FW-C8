@@ -5,26 +5,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import Search from "./Components/Search";
 import ListPlayer from "./Components/ListPlayer";
 import Forms from "./Components/Forms";
-
+import swal from "sweetalert";
 export class App extends Component {
   constructor() {
     super();
     this.state = {
-      players: [{
-        id: 1,
-        username: "admin",
-        email: "admin@gmail.com",
-        password: "123",
-        experience: 1,
-        lvl: 1,
-      },{
-        id: 2,
-        username: "sali",
-        email: "sali@gmail.com",
-        password: "123",
-        experience: 2,
-        lvl: 2,
-      },],
+      players: [],
       searchPlayer: [],
       searchKeyword: "",
       form: {
@@ -55,12 +41,23 @@ export class App extends Component {
     e.preventDefault();
 
     if (this.state.titleForm === "Add Form") {
-      this.state.form.id = this.state.players.length > 0 ? this.state.players[this.state.players.length - 1].id + 1 : 1;
+      swal({
+        title: "Success",
+        text: "Added Player!",
+        icon: "success",
+        button: false,
+        timer: 1500,
+      });
+
+      this.state.form.id =
+        this.state.players.length > 0
+          ? this.state.players[this.state.players.length - 1].id + 1
+          : 1;
 
       this.setState({
         players: [...this.state.players, this.state.form],
         searchPlayer: [],
-        searchKeyword: '',
+        searchKeyword: "",
         form: {
           id: 0,
           username: "",
@@ -74,6 +71,14 @@ export class App extends Component {
     }
 
     if (this.state.titleForm === "Edit Form") {
+      swal({
+        title: "Success",
+        text: "Updated Player!",
+        icon: "success",
+        button: false,
+        timer: 1500,
+      });
+
       const data = this.state.players.map((i) =>
         i.id === this.state.form.id ? this.state.form : i
       );
@@ -81,7 +86,7 @@ export class App extends Component {
       this.setState({
         players: data,
         searchPlayer: [],
-        searchKeyword: '',
+        searchKeyword: "",
         form: {
           id: 0,
           username: "",
@@ -104,25 +109,35 @@ export class App extends Component {
 
   searchPlayerHandler = (value) => {
     const data = this.state.players.filter((data) => {
-      return data.username === value ||
-      data.email === value || 
-      parseInt(data.experience) === parseInt(value) ||
-      parseInt(data.lvl) === parseInt(value)
+      return (
+        data.username === value ||
+        data.email === value ||
+        parseInt(data.experience) === parseInt(value) ||
+        parseInt(data.lvl) === parseInt(value)
+      );
     });
 
     this.setState({
       searchPlayer: data,
-      searchKeyword: value
+      searchKeyword: value,
     });
-  }
+  };
 
   deleteFormHandler = (id) => {
+    swal({
+      title: "Success",
+      text: "Deleted Player!",
+      icon: "success",
+      button: false,
+      timer: 1500,
+    });
+
     const data = this.state.players.filter((i) => i.id !== id);
 
     this.setState({
       players: data,
       searchPlayer: [],
-      searchKeyword: ''
+      searchKeyword: "",
     });
   };
 
@@ -131,7 +146,10 @@ export class App extends Component {
       <Container className="my-4">
         <Row>
           <Col md={8} className="p-4 border">
-            <Search searchPlayerHandler={this.searchPlayerHandler} searchKeyword={this.state.searchKeyword}/>
+            <Search
+              searchPlayerHandler={this.searchPlayerHandler}
+              searchKeyword={this.state.searchKeyword}
+            />
             <ListPlayer
               players={this.state.players}
               searchPlayer={this.state.searchPlayer}

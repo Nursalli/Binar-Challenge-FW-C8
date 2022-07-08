@@ -29,7 +29,7 @@ function ListPlayer(props) {
     <>
       <Row className="overflow-auto players">
         {data.map((data) => (
-          <Col key={data.id} md={4}>
+          <Col key={data.id} md={6} xl={4}>
             <Card className="bg-success text-light shadow mb-3">
               <Card.Header className="text-center">{data.username}</Card.Header>
               <Card.Body>
