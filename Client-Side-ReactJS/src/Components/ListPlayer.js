@@ -5,7 +5,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Modals from "./Modals";
 
 function ListPlayer(props) {
-  const { players, editFormHandler, deleteFormHandler } = props;
+  const { players, searchPlayer, editFormHandler, deleteFormHandler } = props;
 
   const [show, setShow] = useState(false);
   const [id, setId] = useState(0);
@@ -17,10 +17,18 @@ function ListPlayer(props) {
 
   const handleClose = () => setShow(false);
 
+  let data;
+
+  if(searchPlayer.length > 0){
+    data = searchPlayer
+  } else {
+    data = players
+  }
+
   return (
     <>
       <Row className="overflow-auto players">
-        {players.map((data) => (
+        {data.map((data) => (
           <Col key={data.id} md={4}>
             <Card className="bg-success text-light shadow mb-3">
               <Card.Header className="text-center">{data.username}</Card.Header>
@@ -31,15 +39,13 @@ function ListPlayer(props) {
                 <Card.Text>Level: {data.lvl}</Card.Text>
                 <Button
                   variant="warning me-2"
-                  onClick={() => editFormHandler(data)}
-                >
+                  onClick={() => editFormHandler(data)}>
                   <FontAwesomeIcon icon={faPenToSquare} />
                 </Button>
-                <Button variant="danger">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => handleShow(data.id)}
-                  />
+                <Button 
+                  variant="danger" 
+                  onClick={() => handleShow(data.id)}>
+                  <FontAwesomeIcon icon={faTrash} />
                 </Button>
               </Card.Body>
             </Card>

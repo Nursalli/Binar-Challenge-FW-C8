@@ -3,7 +3,8 @@ import { InputGroup, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-function Search() {
+function Search(props) {
+  const { searchPlayerHandler, searchKeyword } = props;
   return (
     <InputGroup className="mb-4">
       <InputGroup.Text id="addonIcon">
@@ -13,6 +14,8 @@ function Search() {
         placeholder="Enter Username, Email, Experience, and Level"
         aria-label="Search"
         aria-describedby="addonIcon"
+        value={searchKeyword}
+        onChange={(e) => searchPlayerHandler(e.target.value)}
       />
     </InputGroup>
   );

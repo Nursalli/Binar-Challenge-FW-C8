@@ -10,7 +10,23 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      players: [],
+      players: [{
+        id: 1,
+        username: "admin",
+        email: "admin@gmail.com",
+        password: "123",
+        experience: 1,
+        lvl: 1,
+      },{
+        id: 2,
+        username: "sali",
+        email: "sali@gmail.com",
+        password: "123",
+        experience: 2,
+        lvl: 2,
+      },],
+      searchPlayer: [],
+      searchKeyword: "",
       form: {
         id: 0,
         username: "",
@@ -43,6 +59,8 @@ export class App extends Component {
 
       this.setState({
         players: [...this.state.players, this.state.form],
+        searchPlayer: [],
+        searchKeyword: '',
         form: {
           id: 0,
           username: "",
@@ -62,6 +80,8 @@ export class App extends Component {
 
       this.setState({
         players: data,
+        searchPlayer: [],
+        searchKeyword: '',
         form: {
           id: 0,
           username: "",
@@ -82,10 +102,27 @@ export class App extends Component {
     });
   };
 
+  searchPlayerHandler = (value) => {
+    const data = this.state.players.filter((data) => {
+      return data.username === value ||
+      data.email === value || 
+      parseInt(data.experience) === parseInt(value) ||
+      parseInt(data.lvl) === parseInt(value)
+    });
+
+    this.setState({
+      searchPlayer: data,
+      searchKeyword: value
+    });
+  }
+
   deleteFormHandler = (id) => {
     const data = this.state.players.filter((i) => i.id !== id);
+
     this.setState({
       players: data,
+      searchPlayer: [],
+      searchKeyword: ''
     });
   };
 
@@ -94,9 +131,10 @@ export class App extends Component {
       <Container className="my-4">
         <Row>
           <Col md={8} className="p-4 border">
-            <Search />
+            <Search searchPlayerHandler={this.searchPlayerHandler} searchKeyword={this.state.searchKeyword}/>
             <ListPlayer
               players={this.state.players}
+              searchPlayer={this.state.searchPlayer}
               editFormHandler={this.editFormHandler}
               deleteFormHandler={this.deleteFormHandler}
             />
