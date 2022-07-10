@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 const db = require("./app/models");
 db.client.sync();
 
-//SwaggerUI
+//Middleware SwaggerUI
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 
 require("./app/routes/player.routes")(app);

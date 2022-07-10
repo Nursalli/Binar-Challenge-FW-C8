@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
     "db:drop": "sequelize db:drop --config=app/config/config.json",
     "db:create": "sequelize db:create --config=app/config/config.json",
-    "db:migrate": "sequelize db:migrate --migrations-path=app/migrations --config=app/config/config.json",
-    "db:seed:all": "sequelize db:seed:all --config=app/config/config.json"
+    "db:migrate": "sequelize db:migrate --migrations-path=app/migrations --config=app/config/config.json"
   },
   "keywords": [],
   "author": "yogisaputro",
