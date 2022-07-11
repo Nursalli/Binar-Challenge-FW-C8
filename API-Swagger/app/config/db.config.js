@@ -1,10 +1,10 @@
 // setup database here, change the values to suit your environment
 module.exports = {
-  HOST: "127.0.0.1",
-  USER: "nursalli",
-  PASSWORD: "nursalli123",
-  DB: "db_challenge_fw_c8_dev",
-  dialect: "postgres",
+  HOST: process.env.DATABASE_HOST,
+  USER: process.env.DATABASE_USERNAME,
+  PASSWORD: process.env.DATABASE_PASSWORD,
+  DB: process.env.DATABASE_NAME,
+  dialect: process.env.DATABASE_TYPE,
   pool: {
     max: 5,
     min: 0,
