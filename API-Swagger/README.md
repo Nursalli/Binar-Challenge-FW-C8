@@ -1,6 +1,6 @@
 ## Setup
 
-create a file named `config.json` in app/config/config.json (this file is required if you are want to run sequelize create database, migrations, etc). adjust the configuration by your own config.
+create a file named `config.json` in app/config folder (this file is required if you are want to run sequelize create database, migrations, etc). adjust the configuration by your own config.
 
 Example:
 ```json
@@ -29,7 +29,7 @@ Example:
 }
 ```
 
-add `.env` file with this kind of format:
+add `.env` in file with this kind of format:
 
 ```
 DATABASE_NAME=try_sequelize
