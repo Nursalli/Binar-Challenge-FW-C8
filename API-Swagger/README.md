@@ -49,5 +49,5 @@ $ npm run start
 ```
 ## API Documentation 
 ```
-Access: (http://localhost:5000/doc)
+Access: (http://localhost:5000/docs)
 ```
