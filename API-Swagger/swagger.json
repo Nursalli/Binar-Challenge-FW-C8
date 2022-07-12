@@ -132,6 +132,22 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Failed to create new player (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "example": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Some error occurred while creating the Player."
+                }
+              }
+            }
           }
         }
       },
@@ -230,6 +246,18 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Failed to find players (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Some error occurred while retrieving players."
+                }
+              }
+            }
           }
         }
       }
@@ -303,6 +331,22 @@
                       "example": "2022-07-10T03:10:09.250Z"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to find player (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "example": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error retrieving Player with id=${id}"
                 }
               }
             }
@@ -394,6 +438,22 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Failed to update player (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "example": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error updating Player with id=${id}"
+                }
+              }
+            }
           }
         }
       },
@@ -448,6 +508,22 @@
                 "message": {
                   "type": "string",
                   "example": "Cannot delete Player with id=${id}. Maybe Player was not found!"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to delete player (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "example": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Could not delete Player with id=${id}"
                 }
               }
             }
@@ -522,6 +598,22 @@
                 "message": {
                   "type": "string",
                   "example": "exp field cannot be empty."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to increase experience (server error)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "example": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error updating Player with id=${id}"
                 }
               }
             }
