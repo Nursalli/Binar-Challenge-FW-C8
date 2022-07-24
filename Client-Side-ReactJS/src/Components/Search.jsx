@@ -11,7 +11,7 @@ function Search(props) {
         <FontAwesomeIcon icon={faSearch} />
       </InputGroup.Text>
       <Form.Control
-        placeholder="Enter Username, Email, Experience, and Level"
+        placeholder="Enter Username, Email, Experience, or Level"
         aria-label="Search"
         aria-describedby="addonIcon"
         value={searchKeyword}
