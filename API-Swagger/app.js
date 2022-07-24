@@ -1,6 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+require('dotenv').config();
+
+//Swagger
+const swaggerJSON = require("./swagger.json");
+const swaggerUI = require("swagger-ui-express");
 
 const app = express();
 
@@ -16,6 +21,9 @@ app.use(bodyParser.json());
 
 const db = require("./app/models");
 db.client.sync();
+
+//Middleware SwaggerUI
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 
 require("./app/routes/player.routes")(app);
 
